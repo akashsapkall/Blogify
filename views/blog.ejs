@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    <title>Home Page</title>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+    <div class="container text-center mt-4">
+        <div >
+            <h2><%= blog.title %></h2>
+        </div>
+        <div class="mt-4">
+            <img src="<%= blog.coverImgUrl %>" alt="..." style="width: 30vw;" >
+        <p class="mt-4"><%= blog.content %></p>
+        </div>
+        <h4>Author</h4>
+        <div class="mt-4" style="background-color: aquamarine;" >
+            <img src="<%= blog.createdBy.profileImgUrl %>" alt="..." style="width: 40px; border-radius: 50%;" >
+        <span class="mt-4"><%= blog.createdBy.name %></span>
+        </div>
+        <h4 class="mt-4">comments</h4>
+        <div>
+            <% comments.forEach((com,index) => { %>
+                <p>
+                    <span><%= index+1 %>.<%= com.comment %></span>|<span><%=com.createdBy.name %></span>
+                </p>
+            <% }) %>
+        </div>
+        <form action="/blog/<%= blog._id %>/comment" method="POST">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Add Comment here" id="floatingTextarea2" style="height: 100px" name="comment"></textarea>
+                <label for="floatingTextarea2">Comment</label>
+              </div>
+          <button type="submit" class="btn btn-primary mt-2">Submit comment</button>
+        </form>
+    </div>
+    <%- include("./partials/script") %>
+</body>
+</html>
